@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('tests', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('company')->nullable();
+            $table->integer('duration_minutes');
+            $table->enum('type', ['mcq', 'coding', 'mixed']);
+            $table->integer('total_marks');
+            $table->text('description')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('tests');
+    }
+};
